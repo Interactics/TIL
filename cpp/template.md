@@ -59,3 +59,66 @@
 - 하지만, .hpp 라는 확장자를 이용하면 선언과 구현을 분할 할 수 있다.
 
 
+## 클래스 템플릿 특수화
+
+
+    template <>
+    class cls<char*>{
+        ...
+    }
+
+### 부분 특수화
+두 개 이상의 타입을 가진 클래스가 있을 때, 부분 형에 대한 특수화가 가능하다.
+
+    template <>
+    class cls<T, int>{
+        ...
+    }
+
+
+## 템플릿 인자 
+템플릿 매개변수는 아직 확정되지 않은 자료형을 지칭하는 이름으로 위에서는 T 혹은 T1이라 기술하였다.
+이 템플릿 매개변수에 전달되는 자료형을 템플린 인자라 부른다.
+
+    template<typename T, int a>
+    class cls {
+        ...
+    }
+
+
+### 디폴트 지정
+템플릿의 매개변수도 디폴트 지정이 가능하다.
+
+    temlpate<typename T = int, int a = 5>
+    class cls{
+        ...
+    }
+
+객체 생성에는 다음과 같다.
+
+    cls<> test;
+
+
+객체 생성할 때, 디폴트로 부르고자 한다면, <>를 반드시 추가하여 선언해야한다.
+
+
+
+### template\<typename T> 와 template<>의 차이점
+
+template\<typenmae t> 와 달리 template<>는 특수화처럼 자료형이 명확히 적혀있는 경우에 사용하면 된다.
+
+
+    template <typename T>
+    class SoSimple {
+    public:
+        T Simple(T a);
+    }
+    template <>
+    class SoSimple<int>{
+        int Simple(int a);
+    }
+
+
+## static
+static 변수가 선언된 클래스는 그 자료형 마다 독립적인 클래스가 생성된다.
+\<int> \<double>등 독립적인 static 을 보유하게 된다.

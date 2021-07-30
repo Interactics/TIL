@@ -77,7 +77,7 @@ v.insert(2, 3);    // 2번째 위치에 3을 삽입한다. 삽입 후 iterator�
 v.erase(iter); // iter가 가리키는 원소르 제거한다. 사이즈는 줄어들고 메모리는 유지한다.
 
 v.empty(); // 비어있다면, size의 크기 == 0 이면 true
-
+```
 
 #smart pointer
 

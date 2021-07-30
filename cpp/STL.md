@@ -79,5 +79,40 @@ v.erase(iter); // iter가 가리키는 원소르 제거한다. 사이즈는 줄�
 v.empty(); // 비어있다면, size의 크기 == 0 이면 true
 
 
+#smart pointer
+
+## unique_ptr
+  - 포인터 공유하지 않음.
+  - 유일한 소유권
+  
+  - double free 버그 : 소멸된 객체를 다시 소멸 시키는 버그 
+  - 더브 프리 버그를 없애기 위해 unique 포인터가 생김
+  
+  
+  ```
+  std::unique_ptr<A> pa(new A());
+  // A* pa = new A(); 와 유사
+  ```
+  - 복사 생성자를 삭제했기 때문에, 클래스으 복사가 진행되지 않음.
+  
+  소유권 이전하기
+  ```
+  std::unique_ptr<A> pa(new A());
+  
+  std::unique_ptr<A> pb = std::move(pa);
+  ```
+  - 이 이후 pa 는 아무것도 지칭하지 않음. 
+  - pa.get() 으 주소값 확인시 nullptr을 지정함.
+  - 따라서 pa 는 댕글리 포인터가 되어 참조 시 에러 발생함. 주의
+  
+  ### 함수 인자로 unique_ptr 사용하기
+  ```
+  void do(std::unique_ptr<A>& ptr) {ptr -> doo(1);) // 객체 소유권이 함수 인자인 ptr로 넘어가므로 원칙 위배
+  
+  void do(A* ptr) {ptr -> doo(1);} // ptr로 바로 사용하도록하기
+  ```
+  
+  
+  
 
 
